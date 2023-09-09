@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Home from "./views/Home/Home";
+import "./App.css";
+import Footer from "./layout/Footer";
+import Shop from "./views/Shop/Shop";
+import Product from "./views/Product/Product";
+import NoMatch from "./views/NoMatch/NoMatch";
+import Navbar from "./layout/Navbar";
+import Cart from "./views/Cart/Cart";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="product/:id" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NoMatch />} />
+      </Route>
+    </Routes>
   );
-}
+};
 
 export default App;
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
